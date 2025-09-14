@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>APM Glossary Quiz</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3b82f6">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card" id="screen-start">
+      <h1>APM Glossary Quiz</h1>
+      <p class="sub">Practice your glossary with configurable modes, difficulty, and timer.</p>
+      <div class="controls">
+        <div>
+          <label for="mode">Mode</label>
+          <select id="mode">
+            <option value="term-to-def">Term → pick the definition</option>
+            <option value="def-to-term">Definition → pick the term</option>
+          </select>
+        </div>
+        <div>
+          <label for="difficulty">Difficulty (options)</label>
+          <select id="difficulty">
+            <option value="2">Easy (2)</option>
+            <option value="4" selected>Medium (4)</option>
+            <option value="6">Hard (6)</option>
+          </select>
+        </div>
+        <div>
+          <label for="numq">Number of questions</label>
+          <select id="numq">
+            <option value="10">10</option>
+            <option value="20" selected>20</option>
+            <option value="50">50</option>
+            <option value="ALL">All</option>
+          </select>
+        </div>
+        <div>
+          <label for="timer">Time per question (seconds)</label>
+          <input id="timer" type="number" min="5" max="120" value="20" />
+        </div>
+      </div>
+      <button class="btn" id="start">Start Game</button>
+    </div>
+
+    <div class="card hidden" id="screen-game">
+      <div class="stats">
+        <div class="pill">Score: <span id="score">0</span></div>
+        <div class="pill">Question: <span id="qnum">0</span>/<span id="qtotal">0</span></div>
+      </div>
+      <div class="progress"><div id="bar"></div></div>
+      <div class="timer"><div id="timebar"></div></div>
+      <div class="question">
+        <div id="prompt" class="prompt">What is the definition of:</div>
+        <div id="stem" class="term">—</div>
+      </div>
+      <div id="options" class="options"></div>
+      <div class="footer">
+        <button id="next" class="btn" disabled>Next</button>
+        <button id="restart" class="btn secondary">Restart</button>
+      </div>
+    </div>
+
+    <div class="card hidden" id="screen-end">
+      <h1>All done! 🎉</h1>
+      <p class="sub">You scored <strong><span id="final-score">0</span></strong> out of <strong><span id="final-total">0</span></strong>.</p>
+      <div class="controls">
+        <button class="btn" id="again">Play Again</button>
+        <button class="btn secondary" id="back">Back to Start</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+    }
+  </script>
+</body>
+</html>
